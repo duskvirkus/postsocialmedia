@@ -4,8 +4,19 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
+const mongoose = require('mongoose');
+
+require('dotenv').config();
 
 const indexRouter = require('./routes/index');
+const ponderingsRouter = require('./routes/ponderings');
+
+(async () => {
+  await mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+})();
 
 let app = express();
 
@@ -26,6 +37,7 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/ponderings', ponderingsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
