@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ponderings</title>
+  </head>
+  <body>
+    <h1>Ponderings</h1>
+    <% for (let i = 0; i < ponderings.length; i++) { %>
+      <div>
+          <%= ponderings[i].pondering %> <%= ponderings[i].time %>
+      </div>
+    <% } %>
+  </body>
+</html>
